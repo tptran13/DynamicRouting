@@ -1,0 +1,103 @@
+//Desi Borisova, Aliaksandr Baradzinchyk, and Tho Tran
+
+public class DijkstraAlgorithm 
+{
+	private int[][] in_matrix;
+	private int in_source;
+	private String[][] in_rTable;
+	
+	public DijkstraAlgorithm(int[][] matrix, int source)
+	{
+		in_matrix = matrix;
+		in_source = source;
+		in_rTable = new String[matrix.length][3];
+	}
+	
+	public void dijkstra()
+	{
+		int v = in_matrix.length;
+		int[] distance = new int[v];
+		boolean[] visited = new boolean [v];
+		int[] line = new int[v];
+		line[in_source] = 0;
+		distance[in_source] = 0;
+   
+		for(int i = 0; i < v; i++)
+		{
+			if(i != in_source)
+				distance[i]=Integer.MAX_VALUE;
+		} 
+  
+		for(int j = 0; j < (v - 1); j++)
+		{
+			int minVertex = findMinVertex(distance, visited);
+			visited[minVertex] = true;
+     
+			for (int k = 0; k < v; k++)
+			{
+				if(in_matrix[minVertex][k] != 0 && !visited[k] && distance[minVertex] != Integer.MAX_VALUE)
+				{
+					int newDist = distance[minVertex] + in_matrix[minVertex][k];
+					
+					if(newDist < distance[k])
+					{
+						distance[k]=newDist;
+					}
+				}   				
+			}
+		}
+		
+		createTable(distance, line);
+	}//end method
+	
+	private int findMinVertex(int [] cost, boolean [] visited)
+	{
+		int minV = -1;
+		int min = Integer.MAX_VALUE;
+   
+		for(int i = 0; i < cost.length; i++)
+		{
+			if(visited[i] == false && cost[i] <= min)
+			{ 
+				min = cost[i];
+				minV = i;
+			}			
+		}	
+		
+		return minV;
+	}//end method
+	
+	private void createTable(int[] distance, int[] line)
+	{
+		for(int i = 0; i < in_rTable.length; i++)
+		{
+			in_rTable[i][0] = "R" + (i + 1);
+			//in_rTable[i][1] = "R" + (line[i] + 1);
+			in_rTable[i][2] = Integer.toString(distance[i]);
+		}
+		
+		for(int i = 0; i < in_rTable.length; i++)
+		{
+		}
+	}
+	
+	public void printTable()
+	{
+		int row = in_rTable.length, col = in_rTable[0].length;
+		System.out.println("---------------------");
+		System.out.println("Routing Table for " + "R" + (in_source + 1));
+		System.out.println("---------------------");
+		System.out.println("Router\t" + "Line\t" + "Cost");
+		System.out.println("---------------------");
+	
+		for(int i = 0; i < row; i++)
+		{
+			for(int j = 0; j < col; j++)
+				System.out.print(in_rTable[i][j] + "\t");
+			
+			System.out.println();
+		}
+		
+		System.out.println("---------------------");
+	}
+}//end class
