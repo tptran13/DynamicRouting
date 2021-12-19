@@ -4,9 +4,9 @@
 <p>Build a network terminal-based simulator for the dynamic routing capability</p>
 
 ## Tasks
-<p>1) Create a class Router that represents a router in a network</p>
+1) Create a class Router that represents a router in a network
 
-<p>2) For every router, implement the following functions:
+2) **For every router, implement the following functions:**
 
      - Display_table: shows the developed routing table (line by line).
 
@@ -19,8 +19,8 @@
 
      - Change_Cost: allows the user of your simulator to simulate a change in the cost between the router and one 
        of its directly connected neighbors. This function accepts two integers, the first identifies the neighbor and 
-       the second identifies the new cost.</p>
+       the second identifies the new cost.
  
-<p>3) Initializer: Initial information about the routers and cost of links that connect them are stored in a 
+3) Initializer: Initial information about the routers and cost of links that connect them are stored in a 
 text file (we will call it configuration file) on your computer. The initializer, as a component, reads this file and creates 
-a list/array of routers accordingly</p>
+a list/array of routers accordingly
